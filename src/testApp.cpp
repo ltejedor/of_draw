@@ -6,30 +6,47 @@
     go crazy wahhh
 */
 
-float playerX;
-float playerY;
+float circleX;
+float circleY;
+float circleRadius;
+float circleSpeed;
+
+float circleTwoX;
+float circleTwoY;
+float circleTwoRadius;
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    playerX = 10;
-    playerY = 10;
-
+    circleSpeed = 0;
+    
+    circleRadius = 20;
+    circleTwoRadius = 20;
+    
+    circleTwoX = 200;
+    circleTwoY = 200;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    circleY = circleY + circleSpeed;
+    
+    circleX = mouseX;
+    circleY = mouseY;
+    
+    if (ofDist(circleX, circleY, circleTwoX, circleTwoY) < circleRadius + circleTwoRadius) {
+        circleTwoX = circleSpeed++;
+    }
 
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    ofFill();
+    ofSetColor(10, 40, 10);
+    ofCircle(circleX, circleY, circleRadius);
     
-    ofTriangle(100, 100, 150, 100, 100, 150);
-    ofTriangle(200, 200, 250, 200, 200, 250);
-    ofTriangle(150, 150, 200, 150, 150, 200);
-    ofTriangle(250, 250, 200, 250, 250, 300);
-    ofTriangle(350, 350, 300, 350, 350, 400);
-
+    ofSetColor(50, 100, 150);
+    ofCircle(circleTwoX, circleTwoY, circleTwoRadius);
 
 }
 
