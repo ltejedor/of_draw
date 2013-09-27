@@ -48,6 +48,13 @@ void testApp::update(){
     for (int i = 0; i< numofObj; i++) {
         if (ofDist(objectX[i], objectY[i], playerX, playerY) < objectRadius + playerRadius) {
             isHoldingObject[i] = true;
+        } else{
+            isHoldingObject[i] = false;
+        }
+        
+        if (isHoldingObject[i]) {
+            objectX[i] = playerX;
+            objectY[i] = playerY;
         }
     }
 
