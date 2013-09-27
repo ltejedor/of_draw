@@ -43,9 +43,11 @@ void testApp::setup(){
         objectY[i] = ofRandom(ofGetHeight());
     }
     
-    goalX = ofRandom(ofGetWidth());
-    goalY = ofRandom(ofGetHeight());
-    goalRadius = 65;
+    goalX = 400;
+    goalY = 400;
+    goalRadius = 55;
+    
+    font.loadFont("Cabin-Regular.otf", 24);
     
 
 }
@@ -65,12 +67,13 @@ void testApp::update(){
             objectY[i] = playerY;
         }
         
-        if (isHoldingObject[i] && !objectInGoal[i]) {
+        if (!objectInGoal[i] && isHoldingObject[i]) {
             if (ofDist(objectX[i], objectY[i], goalX, goalY) < objectRadius + goalRadius) {
                 score++;
                 objectY[i] = goalY;
                 objectX[i] = goalX;
                 objectInGoal[i] = true;
+                isHoldingObject[i] = false;
             }
         }
     }
@@ -95,6 +98,8 @@ void testApp::draw(){
     
     ofSetColor(0,0,0);
     ofCircle(goalX, goalY, goalRadius);
+    
+    font.drawString("Score = " + ofToString(score), 100, 100);
 
 }
 //--------------------------------------------------------------
