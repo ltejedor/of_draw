@@ -6,52 +6,60 @@
     go crazy wahhh
 */
 
-float circleX;
-float circleY;
-float circleRadius;
-float circleSpeed;
+float playerX;
+float playerY;
+float playerRadius;
+float playerSpeed;
+bool isHoldingObject;
 
-float circleTwoX;
-float circleTwoY;
-float circleTwoRadius;
+int score;
+float scoreX;
+float scoreY;
+
+ofTrueTypeFont font;
+
+float goalX;
+float goalY;
+float goalRadius;
+
+const int numofObj = 10;
+float objectX[numofObj];
+float objectY[numofObj];
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    circleSpeed = 0;
-    
-    circleRadius = 20;
-    circleTwoRadius = 20;
-    
-    circleTwoX = 200;
-    circleTwoY = 200;
+    playerX = ofRandom(ofGetWidth());
+    playerY = ofRandom(ofGetHeight());
+    playerRadius = 30;
+    playerSpeed = 20;
+    isHoldingObject = false;
+
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    circleY = circleY + circleSpeed;
-    
-    circleX = mouseX;
-    circleY = mouseY;
-    
-    if (ofDist(circleX, circleY, circleTwoX, circleTwoY) < circleRadius + circleTwoRadius) {
-        circleTwoX = (circleSpeed+1 + (circleTwoX));
-    }
+
 
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     ofFill();
-    ofSetColor(10, 40, 10);
-    ofCircle(circleX, circleY, circleRadius);
     
-    ofSetColor(50, 100, 150);
-    ofCircle(circleTwoX, circleTwoY, circleTwoRadius);
+    ofBackground(0, 100, 42);
+    
+    ofSetColor(120, 200, 255);
+    ofCircle(playerX, playerY, playerRadius);
 
 }
-
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
+    if (key == OF_KEY_UP) {
+        playerY -= playerSpeed;
+    }
+    if (key == OF_KEY_DOWN) {
+        playerY += playerSpeed;
+    }
 
 }
 
