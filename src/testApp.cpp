@@ -34,7 +34,7 @@ void testApp::update(){
     circleY = mouseY;
     
     if (ofDist(circleX, circleY, circleTwoX, circleTwoY) < circleRadius + circleTwoRadius) {
-        circleTwoX = circleSpeed++;
+        circleTwoX = (circleSpeed+1 + (circleTwoX));
     }
 
 }
