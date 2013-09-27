@@ -22,10 +22,13 @@ float goalY;
 float goalRadius;
 
 const int numofObj = 10;
+bool objectInGoal[numofObj];
 float objectX[numofObj];
 float objectY[numofObj];
 float objectRadius;
 bool isHoldingObject[numofObj];
+
+
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -39,6 +42,11 @@ void testApp::setup(){
         objectX[i] = ofRandom(ofGetWidth());
         objectY[i] = ofRandom(ofGetHeight());
     }
+    
+    goalX = ofRandom(ofGetWidth());
+    goalY = ofRandom(ofGetHeight());
+    goalRadius = 65;
+    
 
 }
 
@@ -55,6 +63,15 @@ void testApp::update(){
         if (isHoldingObject[i]) {
             objectX[i] = playerX;
             objectY[i] = playerY;
+        }
+        
+        if (isHoldingObject[i] && !objectInGoal[i]) {
+            if (ofDist(objectX[i], objectY[i], goalX, goalY) < objectRadius + goalRadius) {
+                score++;
+                objectY[i] = goalY;
+                objectX[i] = goalX;
+                objectInGoal[i] = true;
+            }
         }
     }
 
@@ -75,6 +92,9 @@ void testApp::draw(){
     for (int i = 0; i < numofObj; i++) {
         ofCircle(objectX[i], objectY[i], objectRadius);
     }
+    
+    ofSetColor(0,0,0);
+    ofCircle(goalX, goalY, goalRadius);
 
 }
 //--------------------------------------------------------------
